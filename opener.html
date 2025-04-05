@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <body>
 <script>
-    if(window.opener){
-        console.log(window.opener.location)
-        window.opener.location = 'https://google.com'
-    }
+    console.log('window',window.opener)
+    let a = null
+    let c = null
+    /*if(!window.opener.opener){
+        a = window.open('http://127.0.0.1:3000/opener.html','_blank')
+        console.log('a',a)
+        a.onload = function() {
+            console.log('New window loaded:', a);
+            c = a.window.document 
+            console.log('c',c)
+            a.window.location = 'http://challenge01.root-me.org:58003/profile'
+        };
+    }*/
 </script>    
 </body>
 </html>
