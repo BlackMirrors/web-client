@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; url=https://www.google.com">
     <title>Redirecting...</title>
 </head>
 <body>
-    <p>If you are not redirected, <a href="https://www.google.com">click here</a>.</p>
+   <script>
+       fetch('/login', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded', // URL-encoded form data
+    },
+    body: new URLSearchParams({
+        username: 'admin', // Replace with the actual username
+        password: 'admin', // Replace with the actual password
+        _csrf: '<%= csrfToken %>' // CSRF token from your server-side template
+    })
+})
+.then(response => response.json()) // Assuming the response is JSON
+.then(data => {
+    if (data.success) {
+        // Handle success (e.g., redirect or show success message)
+        window.location.href = '/dashboard'; // Adjust based on your flow
+    } else {
+        // Handle failure (e.g., show error message)
+        alert(data.message || 'Login failed');
+    }
+})
+.catch(error => {
+    console.error('Error:', error);
+    alert('Something went wrong!');
+});
+   </script>
 </body>
 </html>
